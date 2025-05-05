@@ -11,6 +11,8 @@ import java.lang.Thread;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -29,13 +31,20 @@ public class MessagingController {
     @FXML
     private Label connectionStatus;
 
-    private ArrayList<String> messages;
+    // List of all messages
+    private ArrayList<Message> messages;
 
-    public void addMessage(String messageText) {
-        Label messageLabel = new Label(messageText);
+    public void addMessage(Message msg) {
+        Label messageLabel = new Label(msg.toString());
         messageContainer.getChildren().add(messageLabel);
     }
 
+    public static String getCurrentTime() {
+        LocalTime time = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return time.format(formatter);
+    }
+    
     public void queueMessageViewportRefresh() {
 
         // Clear viewport
@@ -75,7 +84,8 @@ public class MessagingController {
                 public void onMessage(String message) {
                     // Makes sure that addMessage runs on the FX application thread
                     Platform.runLater(() -> {
-                        messages.add(message);
+                        Message newMessage = new Message(message.split(": ")[0], getCurrentTime(), message.split(": ")[1]);
+                        messages.add(newMessage);
                         queueMessageViewportRefresh();
                     });
 
@@ -92,7 +102,10 @@ public class MessagingController {
                 @Override
                 public void onError(Exception ex) {
                     System.err.println("An error occurred: " + ex.getMessage());
-                    ex.printStackTrace();
+                    Platform.runLater(() -> {
+                        connectionStatus.setStyle("-fx-background-color:rgb(136, 0, 0);");
+                        connectionStatus.setText("Not connected");
+                    });
                 }
             };
 
