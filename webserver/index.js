@@ -28,7 +28,13 @@ wss.on('connection', (ws) => {
         // Sends message to other clients
         for (let client of clients) {
             if (client.socket && client.socket.readyState === WebSocket.OPEN) {
-                client.socket.send(`${client.username}: ${message}`);
+                let senderUsername = ""
+                for (let client2 of clients) {
+                    if (client2.socket == ws) {
+                        senderUsername = client2.username
+                    }
+                }
+                client.socket.send(`${senderUsername}: ${message}`);
             }
         }
     });
