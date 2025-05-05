@@ -20,15 +20,15 @@ wss.on('connection', (ws) => {
         username: generateUsername(),
         socket: ws
     });
-    log(`New client connected. Total clients: ${clients.size}`);
+    log(`New client connected. Total clients: ${clients.length}`);
 
     // Listen for messages
     ws.on('message', (message) => {
 
         // Sends message to other clients
         for (let client of clients) {
-            if (client && client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(message);
+            if (client.socket && client.socket.readyState === WebSocket.OPEN) {
+                client.socket.send(`${client.username}: ${message}`);
             }
         }
     });
@@ -41,7 +41,7 @@ wss.on('connection', (ws) => {
             if (client.socket == ws)
                 clients.splice(clients.indexOf(client), 1)
         }
-        log(`Client disconnected. Total clients: ${clients.size}`);
+        log(`Client disconnected. Total clients: ${clients.length}`);
     });
 
     // Handle errors
