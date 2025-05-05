@@ -1,0 +1,59 @@
+.root {
+    -fx-padding: 0;
+    -fx-background-color: #ffffff;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0 20 0 20;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+#sendContainer {
+    -fx-border-width: 0 0 0 0;
+    -fx-padding: 20 0 0 0;
+    -fx-border-style: solid;
+    -fx-border-width: 1 0 0 0;
+    -fx-padding: 20;
+    -fx-border-color: #b1b1b1 transparent transparent transparent;
+}
+
+#messageContainer {
+    -fx-background-color: #ffffff;
+    -fx-border-style: none;
+}
+
+.label {
+    -fx-font-size: 13px;
+    -fx-font-family: "Montserrat";
+}
+
+.button {
+    -fx-background-color: rgb(0, 136, 0);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 8 16;
+    -fx-font-family: "Montserrat";
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #b1b1b1;
+    -fx-border-radius: 10;
+    -fx-padding: 8 16;
+    -fx-prompt-text-fill: #b1b1b1;
+    -fx-font-family: "Montserrat";
+}
+
+#connectionStatus {
+    -fx-font-size: 10pt;
+    -fx-alignment: center;
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

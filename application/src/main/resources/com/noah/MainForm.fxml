@@ -7,15 +7,18 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
 
 <VBox spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171"
    xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.noah.MessagingController">
    <children>
+      <Label text="" fx:id="connectionStatus" prefWidth="Infinity" />
       <ScrollPane fx:id="scrollPane" fitToWidth="true" VBox.vgrow="ALWAYS">
-         <VBox></VBox>
+         <VBox fx:id="messageContainer">
+         </VBox>
       </ScrollPane>
-      <HBox spacing="5">
-         <TextField fx:id="textInput" promptText="Send a message" HBox.hgrow="ALWAYS"/>
+      <HBox fx:id="sendContainer" spacing="5">
+         <TextField fx:id="textInput" promptText="Send a message" HBox.hgrow="ALWAYS" />
          <Button text="Send" onAction="#handleSendMessage" />
       </HBox>
    </children>
